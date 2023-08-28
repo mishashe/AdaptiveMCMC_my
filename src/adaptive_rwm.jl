@@ -189,6 +189,11 @@ function adaptive_rwm(x0::T, log_p::Function, n::Int; Betas::T,
     X, D, R, S, P = init_arwm(x0, algorithm, rng, q, L,
                               all_levels, nX, log_p, log_pr)
 
+
+    if (Betas == nothing)
+        Betas = zeros(FT, L)
+    end
+    
     # Restore adaptation & sampler states
     if Sp != nothing
         S = Sp
@@ -207,14 +212,14 @@ function adaptive_rwm(x0::T, log_p::Function, n::Int; Betas::T,
         thin, b, fulladapt, indp,
         L, log_pr,
         all_levels, acc_sw, swaps,
-        rng)
+        rng, Betas)
 end
 
 function adaptive_rwm_(X, D, R, S, P, args, params, x0::T, log_p::Function, n::Int,
     thin::Int, b::Int, fulladapt::Bool, indp::Int,
     L::Int, log_pr::Function,
     all_levels::Bool, acc_sw::FT, swaps::Symbol,
-    rng::AbstractRNG) where {FT <: AbstractFloat,
+    rng::AbstractRNG, Betas) where {FT <: AbstractFloat,
     T <: AbstractVector{FT}}
 
     # Acceptance statistics
