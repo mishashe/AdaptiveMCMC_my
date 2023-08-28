@@ -178,7 +178,7 @@ function adaptive_rwm(x0::T, log_p::Function, n::Int;
     all_levels::Bool=false, acc_sw::FT = FT(0.234), swaps::Symbol = :single,
     rng::AbstractRNG=Random.GLOBAL_RNG) where {FT <: AbstractFloat,
     T <: AbstractVector{FT}}
-    println("This is Misha version of the package, not the original one!")
+    println("This is Misha version of the package, not the original one! Added Betas")
     args = (x0, log_p, n)
     params = (algorithm=algorithm, thin=thin, b=b, fulladapt=fulladapt,
               q=q, L=L, log_pr=log_pr, all_levels=all_levels, acc_sw=acc_sw,
@@ -296,5 +296,5 @@ function adaptive_rwm_(X, D, R, S, P, args, params, x0::T, log_p::Function, n::I
     end
 
     (X=X[1], allX=X, D=D, R=R, S=S, Rhos=Rhos, accRWM=accRWM/n, accSW=accSW./nSW,
-    args=args, params=params,Betas)
+    args=args, params=params, Betas)
 end
