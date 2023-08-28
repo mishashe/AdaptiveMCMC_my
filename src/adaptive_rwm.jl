@@ -219,7 +219,7 @@ function adaptive_rwm_(X, D, R, S, P, args, params, x0::T, log_p::Function, n::I
     thin::Int, b::Int, fulladapt::Bool, indp::Int,
     L::Int, log_pr::Function,
     all_levels::Bool, acc_sw::FT, swaps::Symbol,
-    rng::AbstractRNG, Betas) where {FT <: AbstractFloat,
+    rng::AbstractRNG, Betas::T) where {FT <: AbstractFloat,
     T <: AbstractVector{FT}}
 
     # Acceptance statistics
