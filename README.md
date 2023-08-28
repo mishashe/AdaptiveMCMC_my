@@ -2,6 +2,8 @@
 
 # AdaptiveMCMC.jl
 
+THIS IS MY COPY OF THE ORIGINAL PACKAGE 
+
 This package provides implementations of some general-purpose random-walk based adaptive MCMC algorithms, including the following:
 
 * Adaptive Metropolis, proposal covariance adaptation, ([Haario, Saksman and Tamminen, 2001](https://projecteuclid.org/euclid.bj/1080222083), and [Andrieu and Moulines, 2006](http://dx.doi.org/10.1214/105051606000000286))
