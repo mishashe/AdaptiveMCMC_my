@@ -296,5 +296,5 @@ function adaptive_rwm_(X, D, R, S, P, args, params, x0::T, log_p::Function, n::I
     end
 
     (X=X[1], allX=X, D=D, R=R, S=S, Rhos=Rhos, accRWM=accRWM/n, accSW=accSW./nSW,
-    args=args, params=params)
+    args=args, params=params,Betas)
 end
