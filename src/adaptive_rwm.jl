@@ -170,7 +170,7 @@ using MCMCChains, StatsPlots # Assuming MCMCChains & StatsPlots are installed...
 c = Chains(o.X[1]', start=o.params.b, thin=o.params.thin); plot(c)
 ```
 """
-function adaptive_rwm(x0::T, log_p::Function, n::Int;
+function adaptive_rwm(x0::T, log_p::Function, n::Int; Betas::T,
     algorithm::Union{Symbol,Vector{<:AdaptState}}=:ram,
     thin::Int=1, b::Int=max(1,Int(floor(n/5))), fulladapt::Bool=true, 
     Sp=nothing, Rp=nothing, indp=nothing,
@@ -241,7 +241,9 @@ function adaptive_rwm_(X, D, R, S, P, args, params, x0::T, log_p::Function, n::I
     storeLevels = all_levels ? (1:L) : (1:1)
 
     # Initialise inverse temperatures
-    Betas = zeros(FT, L)
+    if (Betas == nothing)
+        Betas = zeros(FT, L)
+    end
     rho2beta!(Betas, Rhos)
 
     for k = 1:n
