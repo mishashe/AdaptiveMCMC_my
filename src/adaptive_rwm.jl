@@ -170,7 +170,7 @@ using MCMCChains, StatsPlots # Assuming MCMCChains & StatsPlots are installed...
 c = Chains(o.X[1]', start=o.params.b, thin=o.params.thin); plot(c)
 ```
 """
-function adaptive_rwm(x0::T, log_p::Function, n::Int; Betas::T=nothing,
+function adaptive_rwm(x0::T, log_p::Function, n::Int; Betas=nothing,
     algorithm::Union{Symbol,Vector{<:AdaptState}}=:ram,
     thin::Int=1, b::Int=max(1,Int(floor(n/5))), fulladapt::Bool=true, 
     Sp=nothing, Rp=nothing, indp=nothing,
@@ -219,7 +219,7 @@ function adaptive_rwm_(X, D, R, S, P, args, params, x0::T, log_p::Function, n::I
     thin::Int, b::Int, fulladapt::Bool, indp::Int,
     L::Int, log_pr::Function,
     all_levels::Bool, acc_sw::FT, swaps::Symbol,
-    rng::AbstractRNG, Betas::T=nothing) where {FT <: AbstractFloat,
+    rng::AbstractRNG, Betas=nothing) where {FT <: AbstractFloat,
     T <: AbstractVector{FT}}
 
     # Acceptance statistics
