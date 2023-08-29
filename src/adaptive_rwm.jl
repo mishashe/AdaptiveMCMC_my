@@ -92,12 +92,12 @@ end
 end
 
 # Initialise the key variables in the adaptive random walk Metropolis algoritm
-@inline function init_arwm(x0::T, algorithm, rng, q, L, all_levels, nX,
+@inline function init_arwm(x0::Matrix, algorithm, rng, q, L, all_levels, nX,
                            log_p, log_pr) where {FT <: AbstractFloat,
                            T <: AbstractVector{FT}}
-    d = length(x0)
+    d = size(x0,2)
     # RWM states, adaptation states...
-    R = [RWMState(x0, rng, q) for i = 1:L]
+    R = [RWMState(x0[i,:], rng, q) for i = 1:L]
     P = Vector{PVals{FT}}(undef, L)
     for lev = 1:L
         r = R[lev]
@@ -106,7 +106,7 @@ end
     
     # Initialise adaptation
     if typeof(algorithm) == Symbol
-        S = [init_rwm_adapt(algorithm, x0) for _ in 1:L]
+        S = [init_rwm_adapt(algorithm, x0[i,:]) for i in 1:L]
     else
         S = algorithm
     end
@@ -125,7 +125,7 @@ Generic adaptive random walk Metropolis algorithm from initial state vector
 including adaptive parallel tempering.
 
 # Arguments
-- `x0::Vector{<:AbstractFloat}`: The initial state vector
+- `x0::Matrix{<:AbstractFloat}`: The initial state vector
 - `log_p::Function`: Function that returns log probability density values
                      (up to an additive constant) for any state vector.
 - `n::Int`: Total number of iterations
@@ -170,7 +170,7 @@ using MCMCChains, StatsPlots # Assuming MCMCChains & StatsPlots are installed...
 c = Chains(o.X[1]', start=o.params.b, thin=o.params.thin); plot(c)
 ```
 """
-function adaptive_rwm(x0::T, log_p::Function, n::Int; Betas=nothing,
+function adaptive_rwm(x0::Matrix, log_p::Function, n::Int; Betas=nothing,
     algorithm::Union{Symbol,Vector{<:AdaptState}}=:ram,
     thin::Int=1, b::Int=max(1,Int(floor(n/5))), fulladapt::Bool=true, 
     Sp=nothing, Rp=nothing, indp=nothing,
@@ -215,7 +215,7 @@ function adaptive_rwm(x0::T, log_p::Function, n::Int; Betas=nothing,
         rng, Betas)
 end
 
-function adaptive_rwm_(X, D, R, S, P, args, params, x0::T, log_p::Function, n::Int,
+function adaptive_rwm_(X, D, R, S, P, args, params, x0::Matrix, log_p::Function, n::Int,
     thin::Int, b::Int, fulladapt::Bool, indp::Int,
     L::Int, log_pr::Function,
     all_levels::Bool, acc_sw::FT, swaps::Symbol,
@@ -305,3 +305,5 @@ function adaptive_rwm_(X, D, R, S, P, args, params, x0::T, log_p::Function, n::I
     (X=X[1], allX=X, D=D, R=R, S=S, Rhos=Rhos, accRWM=accRWM/n, accSW=accSW./nSW,
     args=args, params=params, Betas)
 end
+
+
