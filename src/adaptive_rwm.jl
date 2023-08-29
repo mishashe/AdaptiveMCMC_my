@@ -92,7 +92,7 @@ end
 end
 
 # Initialise the key variables in the adaptive random walk Metropolis algoritm
-@inline function init_arwm(x0::Matrix, algorithm, rng, q, L, all_levels, nX,
+@inline function init_arwm(x0::Matrix{T}, algorithm, rng, q, L, all_levels, nX,
                            log_p, log_pr) where {FT <: AbstractFloat,
                            T <: AbstractVector{FT}}
     d = size(x0,2)
@@ -219,7 +219,7 @@ function adaptive_rwm_(X, D, R, S, P, args, params, x0::Matrix, log_p::Function,
     thin::Int, b::Int, fulladapt::Bool, indp::Int,
     L::Int, log_pr::Function,
     all_levels::Bool, acc_sw::FT, swaps::Symbol,
-    rng::AbstractRNG, Betas=nothing) where {FT <: AbstractFloat,
+    rng::AbstractRNG, Betas::T=nothing) where {FT <: AbstractFloat,
     T <: AbstractVector{FT}}
 
     # Acceptance statistics
