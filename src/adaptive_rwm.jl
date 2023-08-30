@@ -101,7 +101,6 @@ end
     P = Vector{PVals{FT}}(undef, L)
     for lev = 1:L
         r = R[lev]
-        println(log_p(r.x))
         P[lev] = PVals(log_p(r.x), log_pr(r.x))
     end
     
