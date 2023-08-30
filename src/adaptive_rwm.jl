@@ -97,10 +97,11 @@ end
                            T <: AbstractVector{FT}}
     d = size(x0,2)
     # RWM states, adaptation states...
-    R = [RWMState(vec(x0[i,:]), rng, q) for i in 1:L]
+    R = [RWMState(x0[i,:], rng, q) for i in 1:L]
     P = Vector{PVals{FT}}(undef, L)
     for lev = 1:L
         r = R[lev]
+        println(r.x)
         P[lev] = PVals(log_p(r.x), log_pr(r.x))
     end
     
