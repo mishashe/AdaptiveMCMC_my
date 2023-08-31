@@ -251,7 +251,7 @@ function adaptive_rwm_(X, D, R, S, P, args, params, x0::Matrix, log_p::Function,
     if (Betas == nothing)
         Betas = zeros(FT, L)
     end
-    rho2beta!(Betas, Rhos)
+    #rho2beta!(Betas, Rhos)
     
     for k = 1:n
         # The 'real' index, to ensure valid adaptation with restarts
