@@ -252,8 +252,9 @@ function adaptive_rwm_(X, D, R, S, P, args, params, x0::Matrix, log_p::Function,
         Betas = zeros(FT, L)
     end
     rho2beta!(Betas, Rhos)
-    println("1")
+    
     for k = 1:n
+        println("1")
         # The 'real' index, to ensure valid adaptation with restarts
         k_real = k + indp
 
@@ -262,7 +263,7 @@ function adaptive_rwm_(X, D, R, S, P, args, params, x0::Matrix, log_p::Function,
             accRWM[lev] += arwm_step!(R[lev], S[lev], P[lev], Betas[lev],
                                  log_p, log_pr, k_real, fulladapt || k <= b)
         end
-
+println("2")
         # Swap move between random adjacent levels
         if L>1
             if swaps == :single
@@ -293,7 +294,7 @@ function adaptive_rwm_(X, D, R, S, P, args, params, x0::Matrix, log_p::Function,
                 end
             end
         end
-
+println("3")
         # Store output
         for lev in storeLevels
             if k>=b && rem(k-b, thin) == 0
@@ -303,7 +304,7 @@ function adaptive_rwm_(X, D, R, S, P, args, params, x0::Matrix, log_p::Function,
             end
         end
     end
-    println("2")
+    
     (X=X[1], allX=X, D=D, R=R, S=S, Rhos=Rhos, accRWM=accRWM/n, accSW=accSW./nSW,
     args=args, params=params, Betas)
 end
