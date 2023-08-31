@@ -188,7 +188,7 @@ function adaptive_rwm(x0::Matrix{FT}, log_p::Function, n::Int; Betas::T=nothing,
     nX = length(b:thin:n) # Number of output
     X, D, R, S, P = init_arwm(x0, algorithm, rng, q, L,
                               all_levels, nX, log_p, log_pr)
-    println("1")
+
 
 
     if (Betas == nothing)
@@ -208,13 +208,13 @@ function adaptive_rwm(x0::Matrix{FT}, log_p::Function, n::Int; Betas::T=nothing,
             warning("When you restart from a previous sampler state, please also supply the index of the sampler state `indp`. Otherwise, repeated restarts might lead to biased algorithm.")
         end
     end
-println("2")
+
     adaptive_rwm_(X, D, R, S, P, args, params, x0, log_p, n,
         thin, b, fulladapt, indp,
         L, log_pr,
         all_levels, acc_sw, swaps,
         rng, Betas)
-    println("3")
+
 end
 
 function adaptive_rwm_(X, D, R, S, P, args, params, x0::Matrix, log_p::Function, n::Int,
@@ -252,7 +252,7 @@ function adaptive_rwm_(X, D, R, S, P, args, params, x0::Matrix, log_p::Function,
         Betas = zeros(FT, L)
     end
     rho2beta!(Betas, Rhos)
-
+    println("1")
     for k = 1:n
         # The 'real' index, to ensure valid adaptation with restarts
         k_real = k + indp
@@ -303,7 +303,7 @@ function adaptive_rwm_(X, D, R, S, P, args, params, x0::Matrix, log_p::Function,
             end
         end
     end
-
+    println("2")
     (X=X[1], allX=X, D=D, R=R, S=S, Rhos=Rhos, accRWM=accRWM/n, accSW=accSW./nSW,
     args=args, params=params, Betas)
 end
