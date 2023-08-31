@@ -58,9 +58,7 @@ end
         acc = 0
     end
     if do_adapt
-        println(1)
         adapt!(s, r, alpha, k)
-        println(2)
     end
     acc
 end
