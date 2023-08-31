@@ -66,14 +66,12 @@ end
       sr::RWMState{d}, k::Real) :: Nothing where {d}
     
     gamma = get(sa.step, k)
-    println(11)
     sa.dx .= sr.x .- sa.m
     sa.m .+= gamma.*sa.dx
-    println(22)
     rmul!(sa.dx, sqrt(gamma))
-    println(33)
     rmul!(sa.L.factors, sqrt(1.0-gamma))
-    println(44)
+    println(sa.L)
+    println(sa.dx)
     lowrankupdate!(sa.L, sa.dx)
     println(55)
     nothing
