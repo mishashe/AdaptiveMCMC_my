@@ -64,12 +64,15 @@ end
 # Update function -- not yet implemented in the best possible way...
 @inbounds function adapt!(sa::AdaptiveMetropolis{d},
       sr::RWMState{d}, k::Real) :: Nothing where {d}
+    println(11)
     gamma = get(sa.step, k)
+    println(22)
     sa.dx .= sr.x .- sa.m
     sa.m .+= gamma.*sa.dx
     rmul!(sa.dx, sqrt(gamma))
     rmul!(sa.L.factors, sqrt(1.0-gamma))
     lowrankupdate!(sa.L, sa.dx)
+    println(33)
     nothing
 end
 
