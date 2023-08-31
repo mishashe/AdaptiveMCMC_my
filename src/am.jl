@@ -70,9 +70,6 @@ end
     sa.m .+= gamma.*sa.dx
     rmul!(sa.dx, sqrt(gamma))
     rmul!(sa.L.factors, sqrt(1.0-gamma))
-    println(gamma)
-    println(k)
-    println(sa.dx)
     lowrankupdate!(sa.L, sa.dx)
     nothing
 end
