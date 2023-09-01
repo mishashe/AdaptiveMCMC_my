@@ -86,7 +86,7 @@ end
     # Do swap adaptation:
     if do_adapt
         adapt!(Rhos[lev_], R[lev_], alpha, k)
-        #rho2beta!(Betas, Rhos)
+        rho2beta!(Betas, Rhos)
     end
     acc
 end
