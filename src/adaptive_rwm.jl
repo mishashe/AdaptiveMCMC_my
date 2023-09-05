@@ -205,7 +205,7 @@ function adaptive_rwm(x0::Matrix{FT}, log_p::Function, n::Int; Betas::T=nothing,
     if indp == nothing
         indp = 0
         if Sp != nothing
-            warning("When you restart from a previous sampler state, please also supply the index of the sampler state `indp`. Otherwise, repeated restarts might lead to biased algorithm.")
+            #warning("When you restart from a previous sampler state, please also supply the index of the sampler state `indp`. Otherwise, repeated restarts might lead to biased algorithm.")
         end
     end
 
